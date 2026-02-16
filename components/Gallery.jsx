@@ -1,8 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 export default function Gallery() {
+  // Αλλαγή: Ο πίνακας έχει τώρα 6 εικόνες
   const images = [
     "/gallery/1.webp",
     "/gallery/2.webp",
@@ -10,8 +12,6 @@ export default function Gallery() {
     "/gallery/4.webp",
     "/gallery/5.webp",
     "/gallery/6.webp",
-    "/gallery/7.webp",
-    "/gallery/8.webp",
   ];
 
   const [lightboxIndex, setLightboxIndex] = useState(null);
@@ -60,17 +60,19 @@ export default function Gallery() {
           <p className="opacity-70 mt-2 text-white">Δείτε δουλειές, στυλ και ατμόσφαιρα.</p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4"> {/* Άλλαξα το md:grid-cols-4 σε 3 για να φαίνονται πιο ωραία οι 6 εικόνες (2 σειρές x 3) */}
           {images.map((src, i) => (
             <div 
               key={i}
-              className="overflow-hidden rounded-xl shadow-md cursor-pointer"
+              className="relative h-64 w-full overflow-hidden rounded-xl shadow-md cursor-pointer group" // Αύξησα λίγο το ύψος (h-64) για να δείχνουν καλύτερα
               onClick={() => setLightboxIndex(i)}
             >
-              <img
+              <Image
                 src={src}
                 alt={`gallery-${i}`}
-                className="w-full h-48 object-cover hover:scale-110 transition-all duration-300"
+                fill
+                className="object-cover group-hover:scale-110 transition-all duration-300"
+                sizes="(max-width: 768px) 50vw, 33vw"
               />
             </div>
           ))}
@@ -88,7 +90,8 @@ export default function Gallery() {
         >
           <img
             src={images[lightboxIndex]}
-            className="max-h-[90vh] max-w-[90vw] rounded-lg shadow-2xl"
+            alt="Lightbox preview"
+            className="max-h-[90vh] max-w-[90vw] rounded-lg shadow-2xl object-contain"
             onClick={(e) => e.stopPropagation()}
           />
 
@@ -98,7 +101,7 @@ export default function Gallery() {
               e.stopPropagation();
               prevImg();
             }}
-            className="absolute left-6 text-white text-5xl select-none"
+            className="absolute left-6 text-white text-5xl select-none hover:opacity-70"
           >
             ‹
           </button>
@@ -109,7 +112,7 @@ export default function Gallery() {
               e.stopPropagation();
               nextImg();
             }}
-            className="absolute right-6 text-white text-5xl select-none"
+            className="absolute right-6 text-white text-5xl select-none hover:opacity-70"
           >
             ›
           </button>
@@ -117,7 +120,7 @@ export default function Gallery() {
           {/* CLOSE BUTTON */}
           <button
             onClick={() => setLightboxIndex(null)}
-            className="absolute top-6 right-6 text-white text-4xl"
+            className="absolute top-6 right-6 text-white text-4xl hover:opacity-70"
           >
             ×
           </button>

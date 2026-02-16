@@ -2,13 +2,13 @@
 
 import React, { useState } from "react";
 
-import Navbar from "@/components/Navbar";
+// Αφαιρέσαμε τα Navbar, Footer και CookieBanner από εδώ 
+// γιατί υπάρχουν ήδη στο layout.tsx
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import Gallery from "@/components/Gallery";
 import Team from "@/components/Team";
 import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
 import BookingModal from "@/components/BookingModal";
 
 export default function Page() {
@@ -24,17 +24,19 @@ export default function Page() {
 
   return (
     <>
-      <Navbar onBooking={() => setShowBooking(true)} />
+      {/* ΣΗΜΑΝΤΙΚΟ: Τα Navbar/Footer/CookieBanner 
+          εμφανίζονται αυτόματα από το layout.tsx 
+      */}
+      
       <Hero onBooking={() => setShowBooking(true)} />
 
-      {/* FIXED HERE */}
       <Services onBooking={() => setShowBooking(true)} />
 
       <Gallery />
+      
       <Team setShowBooking={setShowBooking} />
+      
       <Contact />
-
-      <Footer />
 
       {/* Booking Modal */}
       {showBooking && (
@@ -43,7 +45,7 @@ export default function Page() {
 
       {/* Success Alert */}
       {success && (
-        <div className="fixed right-6 bottom-6 bg-emerald-500 text-white px-4 py-3 rounded-xl shadow-lg">
+        <div className="fixed right-6 bottom-6 bg-emerald-500 text-white px-4 py-3 rounded-xl shadow-lg z-[100]">
           Το ραντεβού καταχωρήθηκε!
         </div>
       )}

@@ -1,19 +1,21 @@
+import Image from 'next/image';
+
 export default function Team() {
   const teamMembers = [
     {
       name: "Γιάννης",
       role: "Κουρέας / Barber",
-      img: "/team1.webp",
+      img: "/team/team1.webp", // <--- Αλλαγή: Τώρα δείχνει στον φάκελο team
     },
     {
       name: "Μάριος",
       role: "Fade & Modern Cuts Specialist",
-      img: "/team2.webp",
+      img: "/team/team2.webp", // <--- Αλλαγή εδώ
     },
     {
       name: "Πέτρος",
       role: "Classic Barbering Expert",
-      img: "/team3.webp",
+      img: "/team/team3.webp", // <--- Αλλαγή εδώ
     },
   ];
 
@@ -29,13 +31,19 @@ export default function Team() {
           {teamMembers.map((member, index) => (
             <div
               key={index}
-              className="bg-neutral-800 p-6 rounded-xl shadow-lg hover:scale-105 transition"
+              className="bg-neutral-800 p-6 rounded-xl shadow-lg hover:scale-105 transition duration-300"
             >
-              <img
-                src={member.img}
-                alt={member.name}
-                className="w-full h-64 object-cover rounded-lg mb-4"
-              />
+              {/* Wrapper για την εικόνα */}
+              <div className="relative w-full h-64 mb-4 rounded-lg overflow-hidden">
+                <Image
+                  src={member.img}
+                  alt={member.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                />
+              </div>
+              
               <h3 className="text-2xl font-semibold">{member.name}</h3>
               <p className="text-neutral-400">{member.role}</p>
             </div>
