@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: 'export', // Απαραίτητο για το Cloudflare Pages
+  images: {
+    unoptimized: true, // Απαραίτητο για να παίζουν οι εικόνες
+  },
 };
 
 export default nextConfig;
