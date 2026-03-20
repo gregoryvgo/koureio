@@ -4,7 +4,7 @@ export default function Services() {
   const services = [
     { name: 'Κούρεμα Ανδρικό', desc: 'Precision fades, classic cuts, modern styles', price: '15€' },
     { name: 'Ξύρισμα με λεπίδα', desc: 'Hot towel & straight razor finish', price: '20€' },
-    { name: 'Κούρεμα Γυναικείο', desc: 'Layered cuts, styling & finishing', price: '25€' },
+    { name: 'Κούρεμα Shaver', desc: 'Layered cuts, styling & finishing', price: '25€' },
     { name: 'Χτένισμα / Βαφή', desc: 'Color, highlights, styling', price: 'from 30€' },
   ];
 
